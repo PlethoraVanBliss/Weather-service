@@ -1,0 +1,3 @@
+openweathermap.url: localhost:34477
+openweathermap.api.key: b6907d289e10d714a6e88b30761e22
+server.port: 34466

@@ -1,0 +1,26 @@
+de.demo.weather.day-interval:
+  day:
+    start: 6
+    end: 18
+  night:
+   start: 18
+   end:  30 #The following day at 6h = 24h + 6h
+  dayInterval:
+    numberOfDays: 48 # In 48 hours = 2 days
+    startDay: 24 #24h starting the day count from the following day.
+
+de.demo.weather.metrics:
+  conversion:
+    kelvin-to-celsius: -273.15
+
+openweathermap.url: api.openweathermap.org
+openweathermap.api.key: 7e86791bcf0455b77a8f674bdf50dab8
+
+spring.cache.caffeine.spec:
+  maximumSize: 500
+  expireAfterAccess: 259200s
+server:
+  servlet.context-path: /data
+  port: 9000
+
+feign.hystrix.enabled: false
