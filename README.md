@@ -3,7 +3,7 @@
 ##### Installation
 To execute you must first have docker installed.
 
-    docker run r --name weather-forecast-service
+    docker run --rm -p 9000:9000 --name weather-forecast-service plethoarvanblish/weather-forecast:0.0.1-SNAPSHOT
 
 If you don't have docker installed, please referer to the link: https://docs.docker.com/install/
 
@@ -41,4 +41,4 @@ By default, the Docker will expose port 9000, so change this within the Dockerfi
 $ cd weather-forecast
 $ docker build -t development/weatherforecast:${package.json.version} .
 ```
-This will create the weatherforecast image and pull in the necessary dependencies. Be sure to swap out `${package.json.version}` with the actual version of weatherforecast.
+This will create the weatherforecast image and pull in the necessary dependencies. Be sure to swap out `${package.json.version}` with the actual version of weather forecast.service
