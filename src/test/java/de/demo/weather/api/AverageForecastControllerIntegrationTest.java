@@ -13,15 +13,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ClockProvider;
-
-import java.time.Clock;
 import java.time.LocalDateTime;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
- import static de.demo.weather.StubUtils.FORECAST_API_URL;
-import static de.demo.weather.StubUtils.getClock;
-import static de.demo.weather.StubUtils.mockApi;
+import static de.demo.weather.StubUtils.*;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -42,7 +38,7 @@ public class AverageForecastControllerIntegrationTest {
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().port(34477));
 
-    @Value("http://localhost:${local.server.port}/v1/forecast/{city}")
+    @Value("http://localhost:${local.server.port}/data/v1/forecast/{city}")
     private String baseUrl;
 
     @Test
@@ -56,8 +52,8 @@ public class AverageForecastControllerIntegrationTest {
         .then().log().all()
                 .statusCode(OK.value())
                 .body("day", is(19))
-                .body("night", notNullValue())
-                .body("pressure", notNullValue())
+                .body("night", is(17))
+                .body("pressure", is(1028))
         ;
         //@formatter:on
         verify(ONCE, getRequestedFor(urlPathEqualTo(FORECAST_API_URL)));

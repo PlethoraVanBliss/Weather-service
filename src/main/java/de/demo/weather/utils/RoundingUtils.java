@@ -9,7 +9,7 @@ import static java.math.BigDecimal.ROUND_HALF_DOWN;
 @UtilityClass
 public class RoundingUtils {
 
-    public static short round(double number){
-        return new BigDecimal(number).setScale(0, ROUND_HALF_DOWN).shortValue();
+    public static BigDecimal round (double number){
+        return new BigDecimal(number).setScale(0, ROUND_HALF_DOWN);
     }
 }

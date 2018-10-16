@@ -4,7 +4,6 @@ import de.demo.weather.client.OpenWeatherMapService;
 import de.demo.weather.client.OpenWeatherResponseDetailsDTO;
 import de.demo.weather.config.DayIntervalProperties;
 import de.demo.weather.dto.EpochTimePeriod;
-import de.demo.weather.service.MetricConversionService;
 import de.demo.weather.utils.HourIntervalUtils;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 import java.util.function.ToDoubleFunction;
 
-import static de.demo.weather.utils.RoundingUtils.round;
+import static de.demo.weather.utils.RoundingUtils.*;
 
 @Slf4j
 @Component
@@ -29,7 +28,7 @@ abstract class AverageForecastDelegateImpl {
     DayIntervalProperties dayIntervalProperties;
 
     @Autowired
-    OpenWeatherMapService openWeatherMapService;
+    private OpenWeatherMapService openWeatherMapService;
 
     @Autowired
     HourIntervalUtils hourIntervalUtils;
@@ -40,7 +39,7 @@ abstract class AverageForecastDelegateImpl {
                     @NonNull ToDoubleFunction<OpenWeatherResponseDetailsDTO> variableToProcess) {
         OptionalDouble averageForecast = calculateAverageForecast(city, epochTimePeriod, timeSlotCondition, variableToProcess);
         AtomicReference<Short> result = new AtomicReference<>();
-        averageForecast.ifPresent(avgTemp -> result.set(round(avgTemp)));
+        averageForecast.ifPresent(avgTemp -> result.set(round(avgTemp).shortValue()));
         averageForecast.orElseThrow(() -> new IllegalArgumentException("No average forecast"));
         return result.get();
     }

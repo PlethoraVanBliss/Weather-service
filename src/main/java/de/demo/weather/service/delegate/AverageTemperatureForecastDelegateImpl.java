@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 abstract class AverageTemperatureForecastDelegateImpl extends AverageForecastDelegateImpl {
 
     @Autowired
-    MetricConversionService metricConversionService;
+    private MetricConversionService metricConversionService;
 
     short getAverageTemperatureForecast(@Nonnull String city,
                                        @Nonnull Predicate<Pair<OpenWeatherResponseDetailsDTO, Integer>> timeSlotExclusionCondition) {
